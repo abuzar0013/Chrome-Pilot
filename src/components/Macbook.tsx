@@ -1,13 +1,14 @@
 import React from "react";
 import { MacbookScroll } from "@/components/ui/macbook-scroll";
+import { cn } from "@/utlis/cn";
 
-export function MacbookScrollDemo() {
+export function MacbookScrollDemo({ className }: { className?: string }) {
   return (
-    <div className="w-full overflow-hidden bg-white dark:bg-[#0B0B0F]">
+    <div className={cn("w-full overflow-hidden bg-white dark:bg-[#0B0B0F]", className)}>
       <MacbookScroll
         title={
           <span>
-            This Macbook is built with Tailwindcss. <br /> No kidding.
+            Chrome-pilot make your browser effortless <br /> and easy.
           </span>
         }
         badge={
@@ -15,8 +16,9 @@ export function MacbookScrollDemo() {
             <Badge className="h-10 w-10 -rotate-12 transform" />
           </a>
         }
-        src={`/linear.webp`}
+        src={`/macbook.webp`}
         showGradient={false}
+        videoUrl="https://www.youtube.com/embed/htfIU4bIFmE"
       />
     </div>
   );

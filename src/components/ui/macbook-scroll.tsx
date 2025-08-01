@@ -1,6 +1,13 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import { MotionValue, motion, useScroll, useTransform } from "framer-motion";
+import {
+  AnimatePresence,
+  MotionValue,
+  motion,
+  useScroll,
+  useTransform,
+  useMotionValueEvent,
+} from "framer-motion";
 import { cn } from "@/lib/utlis";
 import Image from "next/image";
 import {
@@ -25,17 +32,18 @@ import { IconCommand } from "@tabler/icons-react";
 import { IconCaretLeftFilled } from "@tabler/icons-react";
 import { IconCaretDownFilled } from "@tabler/icons-react";
 
-
 export const MacbookScroll = ({
   src,
   showGradient,
   title,
   badge,
+  videoUrl,
 }: {
   src?: string;
   showGradient?: boolean;
   title?: string | React.ReactNode;
   badge?: React.ReactNode;
+  videoUrl?: string;
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -61,7 +69,11 @@ export const MacbookScroll = ({
     [0, 0.3],
     [0.6, isMobile ? 1 : 1.5],
   );
-  const translate = useTransform(scrollYProgress, [0, 1], [0, 1500]);
+  const translate = useTransform(
+    scrollYProgress,
+    [0, 0.3, 0.5, 1],
+    [0, 150, 150, -800],
+  );
   const rotate = useTransform(scrollYProgress, [0.1, 0.12, 0.3], [-28, -28, 0]);
   const textTransform = useTransform(scrollYProgress, [0, 0.3], [0, 100]);
   const textOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
@@ -69,7 +81,7 @@ export const MacbookScroll = ({
   return (
     <div
       ref={ref}
-      className="flex min-h-[200vh] shrink-0 scale-[0.35] transform flex-col items-center justify-start py-0 [perspective:800px] sm:scale-50 md:scale-100 md:py-80"
+      className="flex min-h-[172vh] shrink-0 scale-[0.35] transform flex-col items-center justify-start py-0 [perspective:800px] sm:scale-50 md:scale-100 md:pt-80"
     >
       <motion.h2
         style={{
@@ -91,6 +103,8 @@ export const MacbookScroll = ({
         scaleY={scaleY}
         rotate={rotate}
         translate={translate}
+        videoUrl={videoUrl}
+        scrollYProgress={scrollYProgress}
       />
       {/* Base area */}
       <div className="relative -z-10 h-[22rem] w-[32rem] overflow-hidden rounded-2xl bg-gray-200 dark:bg-[#272729]">
@@ -126,13 +140,30 @@ export const Lid = ({
   rotate,
   translate,
   src,
+  videoUrl,
+  scrollYProgress,
 }: {
   scaleX: MotionValue<number>;
   scaleY: MotionValue<number>;
   rotate: MotionValue<number>;
   translate: MotionValue<number>;
   src?: string;
+  videoUrl?: string;
+  scrollYProgress: MotionValue<number>;
 }) => {
+  const [isUpright, setIsUpright] = useState(false);
+  const [isScrollingAfterVideo, setIsScrollingAfterVideo] = useState(false);
+
+  useMotionValueEvent(rotate, "change", (latest) => {
+    setIsUpright(latest >= -2);
+  });
+
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    setIsScrollingAfterVideo(latest > 0.5);
+  });
+
+  const showVideo = isUpright && !isScrollingAfterVideo;
+
   return (
     <div className="relative [perspective:800px]">
       <div
@@ -166,14 +197,39 @@ export const Lid = ({
         className="absolute inset-0 h-96 w-[32rem] rounded-2xl bg-[#010101] p-2"
       >
         <div className="absolute inset-0 rounded-lg bg-[#272729]" />
-        {src && (
-          <Image
-            src={src}
-            alt="aceternity logo"
-            fill
-            className="rounded-lg object-cover object-left-top"
-          />
-        )}
+        <AnimatePresence>
+          {showVideo && videoUrl ? (
+            <motion.iframe
+              key="video"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+              src={videoUrl}
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="absolute inset-0 h-full w-full rounded-lg"
+            ></motion.iframe>
+          ) : src ? (
+            <motion.div
+              key="image"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+              className="absolute inset-0"
+            >
+              <Image
+                src={src}
+                alt="aceternity logo"
+                fill
+                className="rounded-lg object-cover object-left-top"
+              />
+            </motion.div>
+          ) : null}
+        </AnimatePresence>
       </motion.div>
     </div>
   );

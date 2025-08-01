@@ -19,11 +19,11 @@ export function NavbarDemo() {
       link: "#features",
     },
     {
-      name: "Pricing",
+      name: "Reviews",
       link: "#pricing",
     },
     {
-      name: "Contact",
+      name: "FAQs",
       link: "#contact",
     },
   ];
