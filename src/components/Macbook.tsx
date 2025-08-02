@@ -1,6 +1,8 @@
 import React from "react";
 import { MacbookScroll } from "@/components/ui/macbook-scroll";
 import { cn } from "@/utlis/cn";
+import { Highlight } from "./ui/hero-highlight";
+
 
 export function MacbookScrollDemo({ className }: { className?: string }) {
   return (
@@ -8,7 +10,7 @@ export function MacbookScrollDemo({ className }: { className?: string }) {
       <MacbookScroll
         title={
           <span>
-            Chrome-pilot make your browser effortless <br /> and easy.
+                  Your custom text with <Highlight>highlighted parts</Highlight>
           </span>
         }
         badge={

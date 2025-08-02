@@ -17,7 +17,7 @@ const config: Config = {
         },
       },
       colors: {
-        customYellow: '#ffcc33',
+        customTheme: '#cd0e66',
       },
       animation: {
         scroll:

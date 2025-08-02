@@ -9,6 +9,7 @@ import {
   useMotionValueEvent,
 } from "framer-motion";
 import { cn } from "@/lib/utlis";
+import { Highlight } from "./hero-highlight";
 import Image from "next/image";
 import {
   IconBrightnessDown,
@@ -92,7 +93,7 @@ export const MacbookScroll = ({
       >
         {title || (
           <span>
-            This Macbook is built with Tailwindcss. <br /> No kidding.
+            This Macbook is built with <Highlight>Tailwindcss</Highlight>. <br /> No kidding.
           </span>
         )}
       </motion.h2>
