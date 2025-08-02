@@ -18,6 +18,8 @@ const config: Config = {
       },
       colors: {
         customTheme: '#cd0e66',
+        customBlue: '#0f82f2',
+        customGreen: '#22ab24',
       },
       animation: {
         scroll:

@@ -10,7 +10,7 @@ export function MacbookScrollDemo({ className }: { className?: string }) {
       <MacbookScroll
         title={
           <span>
-                  Your custom text with <Highlight>highlighted parts</Highlight>
+                  Automate your browser with <Highlight>natural language</Highlight>
           </span>
         }
         badge={

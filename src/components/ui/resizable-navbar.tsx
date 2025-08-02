@@ -230,12 +230,15 @@ export const NavbarLogo = () => {
       href="#"
       className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-black"
     >
-      <Image
-        src="/favicon.png"
-        alt="logo"
-        width={30}
-        height={30}
-      />
+      <div className="bg-gradient-to-br from-neutral-100 to-neutral-200 dark:from-neutral-800 dark:to-neutral-900 rounded-lg p-1">
+        <Image
+          src="/favicon.png"
+          alt="Chrome Pilot Logo"
+          width={36}
+          height={36}
+          className="rounded-md"
+        />
+      </div>
       <span className="font-medium text-black dark:text-white">ChromePilot</span>
     </a>
   );

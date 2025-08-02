@@ -59,7 +59,7 @@ export function Faqs() {
   };
 
   return (
-    <div className="w-full px-4 py-16 bg-transparent">
+    <div id= "faqs" className="w-full px-4 py-16 bg-transparent">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold text-black dark:text-white mb-4">
@@ -79,7 +79,7 @@ export function Faqs() {
             >
               <button
                 onClick={() => toggleItem(index)}
-                className="w-full px-6 py-5 text-left flex items-center justify-between hover:bg-white/50 dark:hover:bg-neutral-900/50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 focus:ring-offset-transparent rounded-2xl"
+                className="w-full px-6 py-5 text-left flex items-center justify-between hover:bg-white/50 dark:hover:bg-neutral-900/50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-customTheme focus:ring-offset-2 focus:ring-offset-transparent rounded-2xl"
                 aria-expanded={openItems.has(index)}
               >
                 <span className="font-semibold text-black dark:text-white text-lg pr-4">
