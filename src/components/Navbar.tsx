@@ -5,11 +5,12 @@ import {
   NavItems,
   MobileNav,
   NavbarLogo,
-  NavbarButton,
   MobileNavHeader,
   MobileNavToggle,
   MobileNavMenu,
 } from "@/components/ui/resizable-navbar";
+import { HoverBorderGradient } from "./ui/hover-border-gradient";
+
 import { useState } from "react";
 
 export function NavbarDemo() {
@@ -38,14 +39,19 @@ export function NavbarDemo() {
           <NavbarLogo />
           <NavItems items={navItems} />
           <div className="flex items-center gap-4">
-            <NavbarButton
+            <a
               href="https://chromewebstore.google.com/detail/hdcehjaodheipickeopncehaikamghjk?utm_source=item-share-cb"
               target="_blank"
               rel="noopener noreferrer"
-              variant="primary"
             >
-              Add to Chrome
-            </NavbarButton>
+              <HoverBorderGradient
+                containerClassName="rounded-full"
+                as="button"
+                className="dark:bg-black bg-white text-black dark:text-white flex items-center space-x-2"
+              >
+                <span>Add to chrome</span>
+              </HoverBorderGradient>
+            </a>
           </div>
         </NavBody>
 
@@ -70,18 +76,6 @@ export function NavbarDemo() {
                 <span className="block">{item.name}</span>
               </a>
             ))}
-            <div className="flex w-full flex-col gap-4">
-              <NavbarButton
-                href="https://chromewebstore.google.com/detail/hdcehjaodheipickeopncehaikamghjk?utm_source=item-share-cb"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setIsMobileMenuOpen(false)}
-                variant="primary"
-                className="w-full"
-              >
-                Add to chrome
-              </NavbarButton>
-            </div>
           </MobileNavMenu>
         </MobileNav>
       </Navbar>

@@ -1,9 +1,10 @@
 import { NavbarDemo } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { MacbookScrollDemo } from "@/components/Macbook"
-import { MobileHero } from "@/components/MobileHero";
+import { HeroSectionOne } from "@/components/MobileHero";
 import { InfiniteMovingCardsDemo } from "@/components/Reviews"
 import { WobbleCardDemo } from "@/components/Wobble"
+import { Faqs } from "@/components/Faq";
 
 
 export default function Home() {
@@ -12,11 +13,11 @@ export default function Home() {
       <NavbarDemo/>
       <MacbookScrollDemo className = "hidden md:block"/>
       <div className="block md:hidden">
-        <MobileHero />
+        <HeroSectionOne />
       </div> 
       <WobbleCardDemo/> 
       <InfiniteMovingCardsDemo/>
-       
+      <Faqs/>
       <Footer/>
     </>
   );

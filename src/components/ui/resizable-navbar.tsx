@@ -236,7 +236,7 @@ export const NavbarLogo = () => {
         width={30}
         height={30}
       />
-      <span className="font-medium text-black dark:text-white">Chrome Pilot</span>
+      <span className="font-medium text-black dark:text-white">ChromePilot</span>
     </a>
   );
 };
